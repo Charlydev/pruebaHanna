@@ -1,0 +1,90 @@
+<div class="form-group">
+    <div class="col-lg-12">       
+        <div class="table-responsive">
+            <div class="dataTable_wrapper">
+            	<form id="form1" ng-submit="agregar(ncl)">
+	                <table class="table">
+						<thead>
+							<tr>
+								<th><label class="control-label" for="nrofactura">Nro Factura:</label></th>
+								<th><label class="control-label" for="ruc">RUC Proveedor:</label></th>
+								<th><label class="control-label" for="proveedor">Denominación de proveedor:</label></th>
+								<th><label class="control-label" for="fechaemision">Emisión:</label></th>
+								<th><label class="control-label" for="moneda">Tipo de Moneda:</label></th>
+								<th><label class="control-label" for="subtotal">Sub total (sin IGV):</label></th>
+								<th><label class="control-label" for="igv">IGV:</label></th>
+								<th><label class="control-label" for="total">Total (inc. IGV):</label></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-nowrap"><input class="form-control" ng-model='ncl.nrofactura' type="text" id="nrofactura" placeholder="Nro Factura" required/></td>
+								<td><input class="form-control" ng-model='ncl.RUC' type="text" pattern="[0-9]{11}" id="ruc" title="Debe ingresar 11 digitos" placeholder="RUC" required/></td>
+								<td><input class="form-control" ng-model='ncl.proveedor' type="text" id="proveedor" placeholder="proveedor" required/></td>
+								<td><input style="width: 150px" class="form-control" ng-model='ncl.fechaemision' type="date" id="fechaemision"/></td>
+								<td><select style="width: 120px" class="form-control" ng-model='ncl.moneda' id="moneda" required>
+	                        		<option value="">- Moneda -</option>
+	                        		<option value="PEN">Soles</option>
+	                        		<option value="USD">Dólares</option>
+	                        	</select></td>
+								<td><input class="form-control" ng-model='ncl.subtotal' type="number" step="any" id="subtotal" placeholder="Subtotal" ng-change="calcular(ncl.subtotal)" required/></td>
+								<td><input class="form-control" ng-model='ncl.igv' type="number" step="any" id="igv" placeholder="IGV" required/></td>
+								<td><input class="form-control" ng-model='ncl.total' type="number" step="any" id="total" placeholder="Total" required/></td>
+								<td><a href="" title="Agregar" onclick="document.getElementById('boton').click();"><span class="glyphicon glyphicon-plus" style="font-size: 20px"></a></td>
+								<button name="boton" id="boton" type="submit" ng-hide="true"></button>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+            </div><!-- /.datatable wrapper -->
+        </div> <!-- /.table-responsive -->
+    </div>
+</div><!-- /.Nuevo-fluid -->
+
+<br/>
+</br><br/><br/>
+
+<div class="form-group" ng-show="Listado.length>0">
+	<h3>Facturas ingresadas:</h3>
+    <div class="col-lg-12">       
+        <div class="table-responsive">
+            <div class="dataTable_wrapper">
+                <table class="table">
+					<thead>
+						<tr>
+							<th>Nro Factura:</th>
+							<th>RUC Proveedor:</th>
+							<th>Denominación de proveedor:</th>
+							<th>Emisión:</th>
+							<th>Tipo de Moneda:</th>
+							<th>Sub total (sin IGV):</th>
+							<th>IGV:</th>
+							<th>Total (inc. IGV):</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="lst in Listado track by $index">
+							<td class="text-nowrap">{{lst.nrofactura}}</td>
+							<td class="text-nowrap">{{lst.RUC}}</td>
+							<td class="text-nowrap">{{lst.proveedor}}</td>
+							<td class="text-nowrap">{{lst.fecha2}}</td>
+							<td class="text-nowrap">{{lst.moneda}}</td>
+							<td class="text-nowrap">{{lst.subtotal | number}}</td>
+							<td class="text-nowrap">{{lst.igv | number}}</td>
+							<td class="text-nowrap">{{lst.total | number}}</td>
+						</tr>
+					</tbody>
+				</table>
+            </div><!-- /.datatable wrapper -->
+        </div> <!-- /.table-responsive -->
+    </div>
+
+    <div class="col-lg-10 col-lg-offset-4">
+        <div class="col-lg-2">
+           <button type="button" ng-click="guardarSAP()" class="col-lg-12 col-xs-12 btn btn-primary">Guardar</button>
+        </div>
+        <div class="col-lg-2">
+           <a href="#/usuario"><button class="col-lg-12 col-xs-12 btn btn-primary">Cancelar</button></a>
+        </div>
+    </div>
+</div><!-- /.Nuevo-fluid -->
